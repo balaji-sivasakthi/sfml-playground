@@ -1,64 +1,62 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+
 class Student
 {
-   std::string m_first = "";
-   std::string m_second = "";
+   std::string m_firstName;
+   std::string m_lastName;
 
 public:
    Student() {}
-   Student(const std::string &first, const std::string &second) : m_first(first), m_second(second)
+   Student(const std::string &firstName, const std::string &lastName) : m_firstName(firstName), m_lastName(lastName) {}
+
+   const std::string &getFirstName() const
    {
-   }
-   const std::string getfirstName() const
-   {
-      return m_first;
+      return m_firstName;
    }
 
-   const std::string getSecondtName() const
+   const std::string &getLastName() const
    {
-      return m_second;
+      return m_lastName;
    }
 };
+
 class Course
 {
-   std::string m_course_name;
+   std::string m_courseName;
    std::vector<Student> m_students;
 
 public:
-   Course()
+   Course() {}
+   Course(const std::string &courseName) : m_courseName(courseName) {}
+
+   void addStudent(const Student &student)
    {
+      m_students.push_back(student);
    }
-   Course(const std::string &course_name) : m_course_name(course_name)
+
+   void loadDataFromFile(const std::string &filename)
    {
-   }
-   void addStudent(const Student &data)
-   {
-      m_students.push_back(data);
-   }
-   void loadDataFromFile(const std::string &filenmae)
-   {
-      std::ifstream ifs(filenmae);
-      std::string first;
-      std::string second;
-      while (ifs >> first)
+      std::ifstream inputFile(filename);
+      std::string firstName, lastName;
+      while (inputFile >> firstName >> lastName)
       {
-         ifs >> second;
-         addStudent(Student(first, second));
+         addStudent(Student(firstName, lastName));
       }
    }
+
    void print() const
    {
-
-      std::cout << "Course Name:" << m_course_name << std::endl;
-      for (auto &it : m_students)
+      std::cout << "Course Name: " << m_courseName << std::endl;
+      for (const auto &student : m_students)
       {
-         std::cout << it.getfirstName() << " " << it.getSecondtName() << std::endl;
+         std::cout << student.getFirstName() << " " << student.getLastName() << std::endl;
       }
    }
 };
-int main(int argc, char *argv[])
+
+int main()
 {
    Course course("Balaji CPP");
    course.addStudent(Student("test", "test"));
