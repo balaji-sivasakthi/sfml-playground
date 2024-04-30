@@ -1,3 +1,3 @@
 # COMP4300 - Game Programming
 
-- [ ] Assignment 1 - Rendering shapes form config file
+- [ ] Assignment 1 - Rendering shapes from config file
