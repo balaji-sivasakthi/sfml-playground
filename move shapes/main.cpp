@@ -108,7 +108,7 @@ public:
     }
     void render()
     {
-
+        // TODO: Collision with window not working as expected
         for (ShapeComponent &component : shapeComponents)
         {
             sf::Shape *local_shape = component.m_shape;
